@@ -1,44 +1,107 @@
 package com.adventureincpod.springmagicshoppe.webserver.models;
 
-import com.adventureincpod.springmagicshoppe.webserver.DAOs.*;
+import com.adventureincpod.springmagicshoppe.webserver.models.crud.*;
+import com.adventureincpod.springmagicshoppe.webserver.repos.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Setter @Getter
 public class Shop {
+    @JsonIgnore
+    private transient WonderRepository wonders;
+    @JsonIgnore
+    private transient PotionRepository potions;
+    @JsonIgnore
+    private transient ScrollRepository scrolls;
+    @JsonIgnore
+    private transient SessionRepository sessionRepository;
+    @JsonIgnore
+    private transient StoredItemsRepository storedItemsRepository;
     private String id;
-    private ArrayList<Item> items;
-    private ArrayList<Wonder> wonders;
-    private ArrayList<Potion> potions;
-    private ArrayList<Scroll> scrolls;
+    private ArrayList<WonderInfo> selectedWonders;
+    private ArrayList<PotionInfo> selectedPotions;
+    private ArrayList<ScrollInfo> selectedScrolls;
     private HashMap<Rarity, Integer> basePrices;
     private HashMap<Types, Integer> discounts;
-    private Random random;
-    private ShopDAO shopDAO;
+    @JsonIgnore
+    private transient Random random;
 
-    public Shop() {
+    public Shop(WonderRepository wonderRepository, PotionRepository potionRepository, ScrollRepository scrollRepository,
+                SessionRepository sessionRepository, StoredItemsRepository storedItemsRepository) {
+        this.wonders = wonderRepository;
+        this.potions = potionRepository;
+        this.scrolls = scrollRepository;
+        this.sessionRepository = sessionRepository;
+        this.storedItemsRepository = storedItemsRepository;
         this.basePrices = new HashMap<>();
         this.discounts = new HashMap<>();
-        this.items = new ArrayList<>();
-        this.scrolls = new ArrayList<>();
+        this.selectedWonders = new ArrayList<>();
+        this.selectedPotions = new ArrayList<>();
+        this.selectedScrolls = new ArrayList<>();
         this.random = new Random();
-        this.shopDAO = new ShopDAO();
         generateBasePrices();
         generateDiscounts();
         this.id = generateShopId();
         generateWonders();
         generatePotions();
         generateScrolls();
+        Sessions session = new Sessions(id, discounts, basePrices);
+        sessionRepository.save(session);
+        for(WonderInfo wonder : selectedWonders) {
+            StoredItems stored = new StoredItems(id, wonder);
+            storedItemsRepository.save(stored);
+        }
+        for(PotionInfo potion: selectedPotions) {
+            StoredItems stored = new StoredItems(id, potion);
+            storedItemsRepository.save(stored);
+        }
+        for(ScrollInfo scroll: selectedScrolls) {
+            StoredItems stored = new StoredItems(id, scroll);
+            storedItemsRepository.save(stored);
+        }
     }
 
-    public Shop(String id) {
-
+    public Shop(String id, WonderRepository wonderRepository, PotionRepository potionRepository,
+                ScrollRepository scrollRepository, SessionRepository sessionRepository,
+                StoredItemsRepository storedItemsRepository) {
+        Gson gson = new Gson();
+        this.wonders = wonderRepository;
+        this.potions = potionRepository;
+        this.scrolls = scrollRepository;
+        this.sessionRepository = sessionRepository;
+        this.storedItemsRepository = storedItemsRepository;
+        this.id = id;
+        this.discounts = new HashMap<>();
+        this.basePrices = new HashMap<>();
+        this.selectedWonders = new ArrayList<>();
+        this.selectedPotions = new ArrayList<>();
+        this.selectedScrolls = new ArrayList<>();
+        Sessions shopSession = sessionRepository.getSessionBySessionId(id);
+        List<StoredItems> itemList = storedItemsRepository.findAllBySessionId(id);
+        HashMap discountsUnparsed = gson.fromJson(shopSession.getDiscounts(), HashMap.class);
+        discountsUnparsed.forEach((k, v) -> discounts.put(Types.valueOf((String) k),((Double) v).intValue()));
+        HashMap basePricesUnparsed = gson.fromJson(shopSession.getBasePrices(), HashMap.class);
+        basePricesUnparsed.forEach((k, v) -> basePrices.put(Rarity.valueOf((String) k), ((Double) v).intValue()));
+        for(StoredItems item : itemList) {
+            if(item.getType().equals("Potion")) {
+                Potion potion = potions.findById(item.getItemId()).get();
+                PotionInfo potionInfo = new PotionInfo(potion, this);
+                selectedPotions.add(potionInfo);
+            } else if(item.getType().equals("Scroll")) {
+                Scroll scroll = scrolls.findById(item.getItemId()).get();
+                ScrollInfo scrollInfo = new ScrollInfo(scroll, this);
+                selectedScrolls.add(scrollInfo);
+            } else {
+                Wonder wonder = wonders.findById(item.getItemId()).get();
+                WonderInfo wonderInfo = new WonderInfo(wonder, this);
+                selectedWonders.add(wonderInfo);
+            }
+        }
     }
 
     private void generateBasePrices() {
@@ -55,40 +118,37 @@ public class Shop {
 
     private String generateShopId() {
         String checkString = RandomStringUtils.randomAlphanumeric(6).toUpperCase();
-        if(!shopDAO.checkID(checkString)) {
+        if(sessionRepository.existsBySessionId(checkString)) {
             checkString = generateShopId();
         }
         return checkString;
     }
 
     private void generateWonders() {
-        WonderDAO wonderDAO = new WonderDAO();
-        List<Wonder> list = wonderDAO.getAll();
+        List<Wonder> list = wonders.findAll();
         for(int i = 0; i <  15; i++) {
             Wonder wonder = list.get(random.nextInt(list.size()));
-            this.items.add(wonder);
-            this.wonders.add(wonder);
+            WonderInfo createdWonder = new WonderInfo(wonder, this);
+            this.selectedWonders.add(createdWonder);
         }
     }
 
     private void generatePotions() {
-        PotionDAO potionDAO = new PotionDAO();
-        List<Potion> list = potionDAO.getAll();
+        List<Potion> list = potions.findAll();
         for(int i = 0; i < 3; i++) {
             Potion potion = list.get(random.nextInt(list.size()));
-            this.items.add(potion);
-            this.potions.add(potion);
+            PotionInfo createdPotion = new PotionInfo(potion, this);
+            this.selectedPotions.add(createdPotion);
         }
     }
 
     private void generateScrolls() {
-        ScrollDAO scrollDAO = new ScrollDAO();
-        List<Scroll> list = scrollDAO.getAll();
+        List<Scroll> list = scrolls.findAll();
         int numberOfScrolls = randomNum(3, 5);
         for(int i = 0; i < numberOfScrolls; i++) {
             Scroll scroll = list.get(random.nextInt(list.size()));
-            this.items.add(scroll);
-            this.scrolls.add(scroll);
+            ScrollInfo createdScroll = new ScrollInfo(scroll, this);
+            this.selectedScrolls.add(createdScroll);
         }
     }
 
