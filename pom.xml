@@ -15,6 +15,7 @@
     <description>Application for generating items.</description>
     <properties>
         <java.version>11</java.version>
+        <start-class>com.adventureincpod.springmagicshoppe.webserver.SpringMagicShoppeApplication</start-class>
     </properties>
     <dependencies>
         <dependency>

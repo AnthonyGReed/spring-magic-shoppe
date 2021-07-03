@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Start-Class: com.adventureincpod.springmagicshoppe.webserver.SpringMagicS
+              hoppeApplication
+Main-Class: com.adventureincpod.springmagicshoppe.webserver.SpringMagicS
+ hoppeApplication
+

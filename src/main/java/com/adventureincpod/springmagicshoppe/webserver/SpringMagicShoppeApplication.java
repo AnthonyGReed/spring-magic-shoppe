@@ -2,8 +2,10 @@ package com.adventureincpod.springmagicshoppe.webserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication
+
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class SpringMagicShoppeApplication {
 
     public static void main(String[] args) {
