@@ -1,6 +1,7 @@
 package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 
+import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.StoredItems;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Wonder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,14 @@ public class WonderInfo extends ItemInfo{
         this.stones = generateStones(Rarity.valueOf(wonder.getRarity().toUpperCase().replace(" ", "")));
         this.charges = generateCharges();
         this.gold = generateGold(shop);
+    }
+
+    public WonderInfo(Wonder wonder, StoredItems item) {
+        super(item.getOnSale());
+        this.wonder = wonder;
+        this.stones = item.getStones();
+        this.charges = item.getCharges();
+        this.gold = item.getGold();
     }
 
     private Integer generateStones(Rarity rarity) {
