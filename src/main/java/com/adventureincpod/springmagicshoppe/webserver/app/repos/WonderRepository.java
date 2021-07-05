@@ -1,6 +1,6 @@
-package com.adventureincpod.springmagicshoppe.webserver.repos;
+package com.adventureincpod.springmagicshoppe.webserver.app.repos;
 
-import com.adventureincpod.springmagicshoppe.webserver.models.crud.Wonder;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Wonder;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

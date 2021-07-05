@@ -1,6 +1,6 @@
-package com.adventureincpod.springmagicshoppe.webserver.repos;
+package com.adventureincpod.springmagicshoppe.webserver.app.repos;
 
-import com.adventureincpod.springmagicshoppe.webserver.models.crud.Scroll;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Scroll;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

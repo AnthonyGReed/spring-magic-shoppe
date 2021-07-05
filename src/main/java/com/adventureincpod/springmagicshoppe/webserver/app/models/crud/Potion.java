@@ -1,4 +1,4 @@
-package com.adventureincpod.springmagicshoppe.webserver.models.crud;
+package com.adventureincpod.springmagicshoppe.webserver.app.models.crud;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,13 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Wonder {
+public class Potion {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String name;
+    private String type;
     private String rarity;
     private String page;
     private String description;
-    private Boolean attunement;
-    private String limits;
-    private String type;
 }

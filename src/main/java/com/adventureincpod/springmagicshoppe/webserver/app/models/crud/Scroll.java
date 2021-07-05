@@ -1,4 +1,4 @@
-package com.adventureincpod.springmagicshoppe.webserver.models.crud;
+package com.adventureincpod.springmagicshoppe.webserver.app.models.crud;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

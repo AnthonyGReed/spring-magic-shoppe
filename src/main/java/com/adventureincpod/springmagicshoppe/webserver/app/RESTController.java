@@ -1,7 +1,7 @@
-package com.adventureincpod.springmagicshoppe.webserver;
+package com.adventureincpod.springmagicshoppe.webserver.app;
 
-import com.adventureincpod.springmagicshoppe.webserver.models.Shop;
-import com.adventureincpod.springmagicshoppe.webserver.repos.*;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.Shop;
+import com.adventureincpod.springmagicshoppe.webserver.app.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

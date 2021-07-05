@@ -1,4 +1,4 @@
-package com.adventureincpod.springmagicshoppe.webserver.models;
+package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

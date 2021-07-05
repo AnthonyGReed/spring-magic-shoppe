@@ -1,7 +1,7 @@
-package com.adventureincpod.springmagicshoppe.webserver.models;
+package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
-import com.adventureincpod.springmagicshoppe.webserver.models.crud.*;
-import com.adventureincpod.springmagicshoppe.webserver.repos.*;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.*;
+import com.adventureincpod.springmagicshoppe.webserver.app.repos.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
 import lombok.Getter;

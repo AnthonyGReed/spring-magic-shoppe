@@ -1,4 +1,4 @@
-package com.adventureincpod.springmagicshoppe.webserver.models;
+package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 /**
  * This is a very simple ENUM of the various types of items possible.

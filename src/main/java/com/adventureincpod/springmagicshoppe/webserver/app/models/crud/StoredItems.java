@@ -1,8 +1,8 @@
-package com.adventureincpod.springmagicshoppe.webserver.models.crud;
+package com.adventureincpod.springmagicshoppe.webserver.app.models.crud;
 
-import com.adventureincpod.springmagicshoppe.webserver.models.PotionInfo;
-import com.adventureincpod.springmagicshoppe.webserver.models.ScrollInfo;
-import com.adventureincpod.springmagicshoppe.webserver.models.WonderInfo;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.PotionInfo;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.ScrollInfo;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.WonderInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

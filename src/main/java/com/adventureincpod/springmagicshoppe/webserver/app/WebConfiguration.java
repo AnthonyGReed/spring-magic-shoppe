@@ -1,4 +1,4 @@
-package com.adventureincpod.springmagicshoppe.webserver;
+package com.adventureincpod.springmagicshoppe.webserver.app;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
