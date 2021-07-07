@@ -1,6 +1,7 @@
 package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Scroll;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.StoredItems;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,20 @@ public class ScrollInfo extends ItemInfo{
     Rarity leveledRarity;
 
     public ScrollInfo(Scroll scroll, Shop shop) {
+        super();
         this.scroll = scroll;
         String level = scroll.getLevel();
         this.spellLevel = level.charAt(0) == 'C' ? 0 : Integer.parseInt(level.substring(0,1));
         this.leveledRarity = getRarity();
         this.gold = generateGold(shop);
+    }
+
+    public ScrollInfo(Scroll scroll, StoredItems item) {
+        super(item.getOnSale());
+        this.scroll = scroll;
+        this.spellLevel = item.getSpellLevel();
+        this.leveledRarity = getRarity();
+        this.gold = item.getGold();
     }
 
     public Integer generateGold(Shop shop) {

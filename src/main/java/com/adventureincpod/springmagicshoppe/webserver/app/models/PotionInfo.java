@@ -1,6 +1,7 @@
 package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Potion;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.StoredItems;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,13 @@ public class PotionInfo extends ItemInfo {
         this.potion = potion;
         this.doses = generateDoses();
         this.gold = generateGold(shop);
+    }
+
+    public PotionInfo(Potion potion, StoredItems item) {
+        super(item.getOnSale());
+        this.potion = potion;
+        this.doses = item.getDoses();
+        this.gold = item.getGold();
     }
 
     private Integer generateDoses() {

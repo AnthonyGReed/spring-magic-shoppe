@@ -90,15 +90,15 @@ public class Shop {
         for(StoredItems item : itemList) {
             if(item.getType().equals("Potion")) {
                 Potion potion = potions.findById(item.getItemId()).get();
-                PotionInfo potionInfo = new PotionInfo(potion, this);
+                PotionInfo potionInfo = new PotionInfo(potion, item);
                 selectedPotions.add(potionInfo);
             } else if(item.getType().equals("Scroll")) {
                 Scroll scroll = scrolls.findById(item.getItemId()).get();
-                ScrollInfo scrollInfo = new ScrollInfo(scroll, this);
+                ScrollInfo scrollInfo = new ScrollInfo(scroll, item);
                 selectedScrolls.add(scrollInfo);
             } else {
                 Wonder wonder = wonders.findById(item.getItemId()).get();
-                WonderInfo wonderInfo = new WonderInfo(wonder, this);
+                WonderInfo wonderInfo = new WonderInfo(wonder, item);
                 selectedWonders.add(wonderInfo);
             }
         }
