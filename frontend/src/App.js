@@ -11,7 +11,7 @@ function App() {
 
   const newShop = () => {
     setShopData("Loading")
-    Axios.get("/api/newShop").then(result => {
+    Axios.get("api/newShop").then(result => {
       console.log(result.data)
       setShopData(result.data)
     })
@@ -25,7 +25,7 @@ function App() {
       setShopData("Error")
     } else {
       try {
-        Axios.get("/api/shopID?id=" + id).then(result => {
+        Axios.get("api/shopID?id=" + id).then(result => {
           setShopData(result.data)
         })
       } catch(err) {
