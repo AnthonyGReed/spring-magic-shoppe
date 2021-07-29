@@ -14,12 +14,11 @@ public class ScrollInfo extends ItemInfo{
     Integer spellLevel;
     Rarity leveledRarity;
 
-    public ScrollInfo(Scroll scroll, Shop shop) {
+    public ScrollInfo(Scroll scroll, Shop shop, Integer spellLevel, Rarity rarity) {
         super();
         this.scroll = scroll;
-        String level = scroll.getLevel();
-        this.spellLevel = level.charAt(0) == 'C' ? 0 : Integer.parseInt(level.substring(0,1));
-        this.leveledRarity = getRarity();
+        this.spellLevel = spellLevel;
+        this.leveledRarity = rarity;
         this.gold = generateGold(shop);
     }
 

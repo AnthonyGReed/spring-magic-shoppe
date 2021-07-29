@@ -9,9 +9,9 @@ function App() {
   const [shopData, setShopData] = useState("");
   const [error, setError] = useState("Something has gone wrong.");
 
-  const newShop = () => {
+  const newShop = (level) => {
     setShopData("Loading")
-    Axios.get("api/newShop").then(result => {
+    Axios.get("api/newShop?shopLevel=" + level).then(result => {
       console.log(result.data)
       setShopData(result.data)
     })

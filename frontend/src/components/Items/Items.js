@@ -14,7 +14,7 @@ function Items(props) {
 
     const getWonderData = (id) => {
       setItemData("Loading")
-      Axios.get("/api/wonders/" + id).then(result => {
+      Axios.get("api/wonders/" + id).then(result => {
         setItemData(result.data)
         handleShow()
       })

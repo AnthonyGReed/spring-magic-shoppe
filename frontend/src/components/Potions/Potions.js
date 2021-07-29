@@ -14,7 +14,7 @@ function Potions(props) {
 
     const getPotionData = (id) => {
         setItemData("Loading...")
-        Axios.get("/api/potions/" + id).then(result => {
+        Axios.get("api/potions/" + id).then(result => {
           setItemData(result.data)
           handleShow()
         })

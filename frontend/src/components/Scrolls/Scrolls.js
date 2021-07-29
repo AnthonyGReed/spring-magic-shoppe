@@ -14,7 +14,7 @@ function Scrolls(props) {
 
     const getScrollData = (id) => {
         setItemData("Loading...")
-        Axios.get("/api/scrolls/" + id).then(result => {
+        Axios.get("api/scrolls/" + id).then(result => {
           setItemData(result.data)
           handleShow()
         })

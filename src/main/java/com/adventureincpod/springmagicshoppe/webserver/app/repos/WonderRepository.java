@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface WonderRepository extends CrudRepository<Wonder, Long> {
     List<Wonder> findAll();
     Optional<Wonder> findById(Long id);
+    List<Wonder> findAllByRarity(String rarity);
 }

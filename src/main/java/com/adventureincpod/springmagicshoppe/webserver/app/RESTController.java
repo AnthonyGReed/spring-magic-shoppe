@@ -21,8 +21,8 @@ public class RESTController {
     StoredItemsRepository storedItemsRepository;
 
     @GetMapping("/api/newShop")
-    public Shop newShop() { return new Shop(wonderRepository, potionRepository, scrollRepository,
-            sessionRepository, storedItemsRepository); }
+    public Shop newShop(@RequestParam(value = "shopLevel") Integer shopLevel) { return new Shop(wonderRepository, potionRepository, scrollRepository,
+            sessionRepository, storedItemsRepository, shopLevel); }
 
     @GetMapping("/api/shopID")
     public Shop savedShop(@RequestParam String id) { return new Shop(id, wonderRepository, potionRepository, scrollRepository,

@@ -1,6 +1,7 @@
 package com.adventureincpod.springmagicshoppe.webserver.app.models.crud;
 
 import com.adventureincpod.springmagicshoppe.webserver.app.models.Rarity;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.ShopLevel;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.Types;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
@@ -20,11 +21,13 @@ public class Sessions {
     private String sessionId;
     private String discounts;
     private String basePrices;
+    private String shopLevel;
 
-    public Sessions(String sessionId, HashMap<Types, Integer> discounts, HashMap<Rarity, Integer> basePrices) {
+    public Sessions(String sessionId, HashMap<Types, Integer> discounts, HashMap<Rarity, Integer> basePrices, ShopLevel shopLevel) {
         Gson gson = new Gson();
         this.sessionId = sessionId;
         this.discounts = gson.toJson(discounts);
         this.basePrices = gson.toJson(basePrices);
+        this.shopLevel = shopLevel.getNAME();
     }
 }

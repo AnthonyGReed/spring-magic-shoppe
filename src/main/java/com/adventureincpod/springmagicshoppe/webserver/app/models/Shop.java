@@ -7,8 +7,10 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Setter @Getter
 public class Shop {
@@ -23,6 +25,7 @@ public class Shop {
     @JsonIgnore
     private transient StoredItemsRepository storedItemsRepository;
     private String id;
+    private ShopLevel shopLevel;
     private ArrayList<WonderInfo> selectedWonders;
     private ArrayList<PotionInfo> selectedPotions;
     private ArrayList<ScrollInfo> selectedScrolls;
@@ -32,12 +35,13 @@ public class Shop {
     private transient Random random;
 
     public Shop(WonderRepository wonderRepository, PotionRepository potionRepository, ScrollRepository scrollRepository,
-                SessionRepository sessionRepository, StoredItemsRepository storedItemsRepository) {
+                SessionRepository sessionRepository, StoredItemsRepository storedItemsRepository, Integer shopLevel) {
         this.wonders = wonderRepository;
         this.potions = potionRepository;
         this.scrolls = scrollRepository;
         this.sessionRepository = sessionRepository;
         this.storedItemsRepository = storedItemsRepository;
+        this.shopLevel = selectShopLevel(shopLevel);
         this.basePrices = new HashMap<>();
         this.discounts = new HashMap<>();
         this.selectedWonders = new ArrayList<>();
@@ -50,7 +54,7 @@ public class Shop {
         generateWonders();
         generatePotions();
         generateScrolls();
-        Sessions session = new Sessions(id, discounts, basePrices);
+        Sessions session = new Sessions(id, discounts, basePrices, this.shopLevel);
         sessionRepository.save(session);
         for(WonderInfo wonder : selectedWonders) {
             StoredItems stored = new StoredItems(id, wonder);
@@ -127,7 +131,11 @@ public class Shop {
     private void generateWonders() {
         List<Wonder> list = wonders.findAll();
         for(int i = 0; i <  15; i++) {
-            Wonder wonder = list.get(random.nextInt(list.size()));
+            Rarity rarity = selectRarity(shopLevel);
+            List<Wonder> filteredList = list.stream()
+                    .filter(w -> w.getRarity().equals(rarity.getName()))
+                    .collect(Collectors.toList());
+            Wonder wonder = filteredList.get(random.nextInt(filteredList.size()));
             WonderInfo createdWonder = new WonderInfo(wonder, this);
             this.selectedWonders.add(createdWonder);
         }
@@ -136,7 +144,11 @@ public class Shop {
     private void generatePotions() {
         List<Potion> list = potions.findAll();
         for(int i = 0; i < 3; i++) {
-            Potion potion = list.get(random.nextInt(list.size()));
+            Rarity rarity = selectRarity(shopLevel);
+            List<Potion> filteredList = list.stream()
+                    .filter(p -> p.getRarity().equals(rarity.getName()))
+                    .collect(Collectors.toList());
+            Potion potion = filteredList.get(random.nextInt(filteredList.size()));
             PotionInfo createdPotion = new PotionInfo(potion, this);
             this.selectedPotions.add(createdPotion);
         }
@@ -146,13 +158,60 @@ public class Shop {
         List<Scroll> list = scrolls.findAll();
         int numberOfScrolls = randomNum(3, 5);
         for(int i = 0; i < numberOfScrolls; i++) {
-            Scroll scroll = list.get(random.nextInt(list.size()));
-            ScrollInfo createdScroll = new ScrollInfo(scroll, this);
+            Rarity rarity = selectRarity(shopLevel);
+            Integer spellLevel = randomNum(rarity.getSpellLevelMin(), rarity.getSpellLevelMax());
+            List<Scroll> filteredList = list.stream()
+                    .filter(s -> (s.getLevel().charAt(0) == 'C' ? 0 : Integer.parseInt(s.getLevel().substring(0,1)))
+                            <= spellLevel)
+                    .collect(Collectors.toList());
+            Scroll scroll = filteredList.get(random.nextInt(filteredList.size()));
+            ScrollInfo createdScroll = new ScrollInfo(scroll, this, spellLevel, rarity);
             this.selectedScrolls.add(createdScroll);
+        }
+    }
+
+    private Rarity selectRarity(ShopLevel shopLevel) {
+        int roll = randomNum(1,15);
+        if(roll == 1) {
+            return shopLevel.getSLOT1();
+        } else if(roll <= 3) {
+            return shopLevel.getSLOT2();
+        } else if(roll <= 6) {
+            return shopLevel.getSLOT3();
+        } else if(roll <= 10) {
+            return shopLevel.getSLOT4();
+        } else {
+            return shopLevel.getSLOT5();
+        }
+    }
+
+    private ShopLevel selectShopLevel(Integer shopLevel) {
+        switch(shopLevel) {
+            case 1:
+                return ShopLevel.LEVEL1;
+            case 2:
+                return ShopLevel.LEVEL2;
+            case 3:
+                return ShopLevel.LEVEL3;
+            case 4:
+                return ShopLevel.LEVEL4;
+            case 5:
+                return ShopLevel.LEVEL5;
+            case 6:
+                return ShopLevel.LEVEL6;
+            case 7:
+                return ShopLevel.LEVEL7;
+            case 8:
+                return ShopLevel.LEVEL8;
+            case 9:
+                return ShopLevel.LEVEL9;
+            default:
+                return ShopLevel.LEVEL10;
         }
     }
 
     private Integer randomNum(Integer min, Integer max) {
         return random.nextInt(max - min + 1) + min;
     }
+
 }
