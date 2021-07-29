@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {FormControl, Dropdown, DropdownButton} from 'react-bootstrap'
-import ModalWithButton from "../ModalWithButton/ModalWithButton";
+import ModalWithButton from "../../components/ModalWithButton/ModalWithButton";
 
 const Main = (props) => {
+
     const [shopID, setShopID] = useState("");
     const [shopLevel, setShopLevel] = useState(1);
 
     const [showNewShopModal, setShowNewShopModal] = useState(false);
     const [showLoadShopModal, setShowLoadShopModal] = useState(false);
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if(showLoadShopModal) {
+            inputRef.current.focus();
+        }
+    })
 
     const handleNewShopClose = () => setShowNewShopModal(false);
     const handleNewShopShow = () => setShowNewShopModal(true);
@@ -65,7 +74,9 @@ const Main = (props) => {
                     value={shopID}
                     onChange={e => setShopID(e.target.value)}
                     onKeyDown={checkKey}
-                    placeholder={"Shop ID"} />
+                    placeholder={"Shop ID"}
+                    ref={inputRef}
+                />
             </ModalWithButton>
         </>
     )

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import './App.css';
-import Main from './components/Main/Main'
+import Main from './containers/Main/Main'
 import Shop from './containers/Shop/Shop'
 import Axios from 'axios'
 import {Container, Row} from 'react-bootstrap';
