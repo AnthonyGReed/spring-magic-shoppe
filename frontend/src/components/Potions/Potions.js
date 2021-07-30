@@ -22,7 +22,8 @@ function Potions(props) {
 
     const potions = props.data.map((item, index) => {
       return(<tr key={index} onClick={() => getPotionData(item.potion.id)} className={item.onSale ? "sale" : ""}>
-        <td><span className={`dot ${item.potion.rarity.toUpperCase()}`}></span> {item.potion.name} {item.onSale && <Badge pill>Sale!</Badge>}</td>
+        <td><span className={`dot ${item.potion.rarity.toUpperCase().split(" ").join("")}`}></span>
+            {item.potion.name} {item.onSale && <Badge pill>Sale!</Badge>}</td>
         <td>{item.potion.type}</td>
         <td>{item.gold}</td>
         <td>{item.doses}</td>
