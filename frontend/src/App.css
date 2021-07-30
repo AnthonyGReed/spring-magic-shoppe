@@ -6,32 +6,64 @@
   overflow-y: scroll;
 }
 
+a{
+  color: #242014;
+}
+
+a:active a:visited a:hover {
+  color: #CFBD91;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #242014;
+}
+
+.title {
+  color: #cfbd91;
+  vertical-align: middle;
+}
+
 .buttonholder{
   display: flex;
   justify-content: center;
 }
 
-.buttonholder>.btn {
-  padding: 1em;
-  margin: 2em;
-  font-size: 1.5em;
-}
-
 .btn {
-  background-color: #CFBD91;
-  color: #242014;
-  border: 1px solid #242014;
+  background-color: #242014;
+  color: #CFBD91;
+  border: 0 none;
+  border-radius: 0;
 }
 
-.btn:hover {
+.btn:focus,
+.btn:active{
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+.btn:hover, .btn:focus, .btn:active {
   background-color: #242014;
   color: #E9E0CC;
-  border: 1px solid #CFBD91;
+  border: 0 none;
+}
+
+.instructions {
+  margin: 0 5%;
 }
 
 .shopId {
   font-weight: bold;
   font-size: 2em;
+}
+
+.modal-content {
+  background-color: #CFBD91;
 }
 
 thead {
@@ -52,6 +84,7 @@ tbody>tr:hover {
   width: 7px;
   border-radius: 50%;
   display: inline-block;
+  margin-right: .75em;
 }
 
 .COMMON {

@@ -10,7 +10,6 @@ const Shop = (props) => {
             <p className="shopId">Shop ID: {props.data.id.toUpperCase()}</p>
             <Table responsive>
                 <thead>
-
                     <tr>
                         <th>Name</th>
                         <th>Type</th>

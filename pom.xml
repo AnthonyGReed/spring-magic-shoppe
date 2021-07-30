@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.adventureincpod</groupId>
     <artifactId>spring-magic-shoppe</artifactId>
-    <version>0.2.6</version>
+    <version>0.3.0</version>
     <name>Spring Magic Shoppe</name>
     <description>Application for generating items.</description>
     <properties>

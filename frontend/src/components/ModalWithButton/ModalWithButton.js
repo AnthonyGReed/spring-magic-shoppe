@@ -4,7 +4,7 @@ import {Button, Modal, Col} from "react-bootstrap";
 const ModalWithButton = (props) => {
     return (
         <>
-            <Col>
+            <Col className={"buttonholder"}>
                 <Button variant="outline-primary" onClick={() => {props.handleShow()}}> {props.buttonText} </Button>
             </Col>
             <Modal show={props.show} onHide={() => {props.handleClose()}}>
