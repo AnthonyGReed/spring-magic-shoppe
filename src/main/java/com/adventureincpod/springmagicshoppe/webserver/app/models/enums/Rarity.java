@@ -1,4 +1,4 @@
-package com.adventureincpod.springmagicshoppe.webserver.app.models;
+package com.adventureincpod.springmagicshoppe.webserver.app.models.enums;
 
 /**
  * This is an enum with all the rarities and easily changeable configuration for all of them.

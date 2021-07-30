@@ -1,5 +1,7 @@
 package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Rarity;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Types;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

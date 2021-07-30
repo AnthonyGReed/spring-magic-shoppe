@@ -3,6 +3,7 @@ package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.StoredItems;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Wonder;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Rarity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,8 +1,8 @@
 package com.adventureincpod.springmagicshoppe.webserver.app.models.crud;
 
-import com.adventureincpod.springmagicshoppe.webserver.app.models.Rarity;
-import com.adventureincpod.springmagicshoppe.webserver.app.models.ShopLevel;
-import com.adventureincpod.springmagicshoppe.webserver.app.models.Types;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Rarity;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.ShopLevel;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Types;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

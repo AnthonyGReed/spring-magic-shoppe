@@ -2,6 +2,7 @@ package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Scroll;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.StoredItems;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Rarity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,13 @@ public class ScrollInfo extends ItemInfo{
     }
 
     public Integer generateGold(Shop shop) {
-        return (int) Math.round(calculateBasePrice(shop.getBasePrices(), shop.getDiscounts(), leveledRarity, scroll.getType()));
+        Double price = calculateBasePrice(shop.getBasePrices(), shop.getDiscounts(), leveledRarity, scroll.getType());
+        int spellUpcast = spellLevel - Integer.parseInt(scroll.getLevel().substring(0,1));
+        for(int i = 0; i < spellUpcast; i++) {
+            price *= .9;
+        }
+        price += randomNum(0,5);
+        return (int) Math.round(price) * 10;
     }
 
     private Rarity getRarity() {

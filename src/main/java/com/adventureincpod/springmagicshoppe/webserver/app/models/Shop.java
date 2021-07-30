@@ -1,6 +1,9 @@
 package com.adventureincpod.springmagicshoppe.webserver.app.models;
 
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.*;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Rarity;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.ShopLevel;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Types;
 import com.adventureincpod.springmagicshoppe.webserver.app.repos.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;

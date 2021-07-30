@@ -1,4 +1,4 @@
-package com.adventureincpod.springmagicshoppe.webserver.app.models;
+package com.adventureincpod.springmagicshoppe.webserver.app.models.enums;
 
 public enum ShopLevel {
     LEVEL1(Rarity.LEGENDARY, Rarity.VERYRARE, Rarity.RARE, Rarity.UNCOMMON, Rarity.COMMON, "Level 1", 1),
