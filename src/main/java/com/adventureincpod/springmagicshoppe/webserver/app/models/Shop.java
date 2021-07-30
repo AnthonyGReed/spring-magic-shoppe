@@ -157,14 +157,15 @@ public class Shop {
         List<Scroll> list = scrolls.findAll();
         int numberOfScrolls = randomNum(3, 5);
         for(int i = 0; i < numberOfScrolls; i++) {
+            System.out.println("Creating Scrolls");
             Rarity rarity = selectRarity(shopLevel);
-            Integer spellLevel = randomNum(rarity.getSpellLevelMin(), rarity.getSpellLevelMax());
+            Integer selectedSpellLevel = randomNum(rarity.getSpellLevelMin(), rarity.getSpellLevelMax());
             List<Scroll> filteredList = list.stream()
-                    .filter(s -> (s.getLevel().charAt(0) == 'C' ? 0 : Integer.parseInt(s.getLevel().substring(0,1)))
-                            <= spellLevel)
+                    .filter(s -> (Integer.parseInt(s.getLevel().substring(0,1)))
+                            <= selectedSpellLevel)
                     .collect(Collectors.toList());
             Scroll scroll = filteredList.get(random.nextInt(filteredList.size()));
-            ScrollInfo createdScroll = new ScrollInfo(scroll, this, spellLevel, rarity);
+            ScrollInfo createdScroll = new ScrollInfo(scroll, this, selectedSpellLevel, rarity);
             this.selectedScrolls.add(createdScroll);
         }
     }
