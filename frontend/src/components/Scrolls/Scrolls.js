@@ -22,7 +22,7 @@ function Scrolls(props) {
 
     const scrolls = props.data.map((item, index) => {
       return(<tr key={index} onClick={() => getScrollData(item.scroll.id)} className={item.onSale ? "sale" : ""}>
-        <td><span className={`dot ${item.leveledRarity}`}></span> Scroll of {item.scroll.name}, {item.spellLevel}
+        <td><span className={`dot ${item.leveledRarity}`}/> Scroll of {item.scroll.name}, {item.spellLevel}
             {item.spellLevel === 1 ? "st" : item.spelllevel === 2 ? "nd" : item.spellLevel === 3 ? "rd" : "th" } Level
             {item.scroll.onSale && <Badge pill>On Sale!</Badge>}</td>
         <td>{item.scroll.type}</td>

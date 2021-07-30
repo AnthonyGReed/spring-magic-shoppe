@@ -22,7 +22,7 @@ function Items(props) {
 
     const items = props.data.map((item, index) => {
       return(<tr key={index} onClick={() => getWonderData(item.wonder.id)}>
-        <td><span className={`dot ${item.wonder.rarity.toUpperCase().split(" ").join("")}`}></span>
+        <td><span className={`dot ${item.wonder.rarity.toUpperCase().split(" ").join("")}`}/>
             {item.wonder.name} {item.onSale && <Badge pill>Sale!</Badge>}</td>
         <td>{item.wonder.type}</td>
         <td>{item.gold}</td>
