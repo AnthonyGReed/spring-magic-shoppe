@@ -1,13 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Items from "../../components/Items/Items"
 import Potions from '../../components/Potions/Potions'
 import Scrolls from '../../components/Scrolls/Scrolls'
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
+import Toast from 'react-bootstrap/Toast'
+import {useLocation} from "react-router-dom";
+import {Row, Col} from "react-bootstrap";
 
 const Shop = (props) => {
+    const[showToast, setShowToast] = useState(false);
+
+    const toggleShowToast = () => setShowToast(!showToast)
+
+    let location = useLocation()
     return(
         <div>
-            <p className="shopId">Shop ID: {props.data.id.toUpperCase()}</p>
+            <Row className={"info-row"}>
+                <Col>
+                    <p className="shopId">Shop ID: {props.data.id.toUpperCase()}</p>
+                </Col>
+                <Col>
+                    <Toast show={showToast} onClose={toggleShowToast} position={'top-center'} delay={3000} autohide>
+                        <Toast.Header>
+                            <strong className="me-auto">System</strong>
+                        </Toast.Header>
+                        <Toast.Body>URL successfully Copied!</Toast.Body>
+                    </Toast>
+                </Col>
+                <Col>
+                    <Button onClick={() => {
+                        navigator.clipboard.writeText("https://apps.seriousbusiness.network/magic/" + location.search).then(
+                            () => {
+                                setShowToast(true);
+                            }
+                        );
+                        }}>Share
+                    </Button>
+                </Col>
+            </Row>
             <Table responsive>
                 <thead>
                     <tr>

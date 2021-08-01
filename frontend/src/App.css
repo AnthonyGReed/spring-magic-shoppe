@@ -110,3 +110,8 @@ tbody>tr:hover {
 .badge {
   background-color: green;
 }
+
+.info-row {
+  height: 95px;
+  align-items: flex-end;
+}

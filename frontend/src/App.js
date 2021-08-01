@@ -1,26 +1,44 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './App.css';
 import Main from './containers/Main/Main'
 import Shop from './containers/Shop/Shop'
 import Axios from 'axios'
-import {Col, Container, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap'
+import { useHistory, useLocation, withRouter } from 'react-router-dom'
+
 
 function App() {
   const [shopData, setShopData] = useState("");
   const [error, setError] = useState("Something has gone wrong.");
+  const [shopId, setShopId] = useState(null);
+  let history = useHistory();
+  let location = useLocation();
 
   const newShop = (level) => {
     setShopData("Loading")
     Axios.get("api/newShop?shopLevel=" + level).then(result => {
-      console.log(result.data)
-      setShopData(result.data)
+      history.push("?id=" + result.data)
     })
+  }
+
+  useEffect(() => {
+      let query = location.search.split("=")[1]
+      if(query !== shopId) {
+         setShopId(query)
+          if(query && query !== "") {
+            loadShop(query)
+          }
+      }
+  }, [location.search, shopId])
+
+  const getShopFromSearchParams = (id) => {
+      history.push("?id=" + id)
   }
 
   const loadShop = (id) => {
     setShopData("Loading")
-    let shopId = id.match(/^[a-z0-9]+$/i)
-    if(id.length !== 6 || !shopId) {
+    let shopLoadId = id.match(/^[a-z0-9]+$/i)
+    if(id.length !== 6 || !shopLoadId) {
       setError("Sorry. We could not find a shop with that ID. Please try again.")
       setShopData("Error")
     } else {
@@ -29,7 +47,7 @@ function App() {
           setShopData(result.data)
         })
       } catch(err) {
-        if(err.response.status === "404") {
+        if(err.response.status === 404) {
           setError("Sorry. We could not find a shop with that ID. Please try again.")
           setShopData("Error")
         } else {
@@ -104,16 +122,16 @@ function App() {
   }
 
   return (
-    <Container fluid className="App">
-      <Row className="header">
-        <Col><p className={"title"}>Adventure Incorporated Magic Shoppe</p></Col>
-        <Main new={newShop} load={loadShop}/>
-      </Row>
-      <Row>
-        {table}
-      </Row>
-    </Container>
+        <Container fluid className="App">
+          <Row className="header">
+            <Col><p className={"title"}>Adventure Incorporated Magic Shoppe</p></Col>
+            <Main new={newShop} load={getShopFromSearchParams}/>
+          </Row>
+          <Row>
+            {table}
+          </Row>
+        </Container>
   );
 }
 
-export default App;
+export default withRouter(App);

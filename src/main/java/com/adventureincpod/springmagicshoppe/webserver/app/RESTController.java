@@ -21,11 +21,14 @@ public class RESTController {
     StoredItemsRepository storedItemsRepository;
 
     @GetMapping("/api/newShop")
-    public Shop newShop(@RequestParam(value = "shopLevel") Integer shopLevel) { return new Shop(wonderRepository, potionRepository, scrollRepository,
-            sessionRepository, storedItemsRepository, shopLevel); }
+    public String newShop(@RequestParam(value = "shopLevel") Integer shopLevel) {
+        Shop shop = new Shop(wonderRepository,
+            potionRepository, scrollRepository, sessionRepository, storedItemsRepository, shopLevel);
+        return shop.getId();
+    }
 
     @GetMapping("/api/shopID")
-    public Shop savedShop(@RequestParam String id) { return new Shop(id, wonderRepository, potionRepository, scrollRepository,
-            sessionRepository, storedItemsRepository); }
+    public Shop savedShop(@RequestParam String id) { return new Shop(id, wonderRepository, potionRepository,
+            scrollRepository, sessionRepository, storedItemsRepository); }
 
 }
