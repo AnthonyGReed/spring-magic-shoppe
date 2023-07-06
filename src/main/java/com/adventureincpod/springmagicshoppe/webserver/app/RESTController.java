@@ -34,7 +34,7 @@ public class RESTController {
             scrollRepository, sessionRepository, storedItemsRepository); }
 
     @GetMapping("/api/essence")
-    public EssencePicker newPicker(@RequestParam( value = "rarity") Rarity rarity, @RequestParam String type ) {
+    public EssencePicker newPicker(@RequestParam("rarity") Rarity rarity, @RequestParam String type ) {
         return new EssencePicker(rarity, type);
     }
 

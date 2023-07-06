@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter @Getter
 public class EssencePicker {
     @JsonIgnore
+    @Autowired
     private transient WonderRepository wonders;
     private Rarity rarity;
     private String type;
