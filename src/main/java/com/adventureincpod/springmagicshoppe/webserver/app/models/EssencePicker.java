@@ -20,7 +20,7 @@ public class EssencePicker {
     @JsonIgnore
     private transient WonderRepository wonders;
     private Rarity rarity;
-    private String type;
+    private Types type;
     private ArrayList<Wonder> selectedWonders;
     @JsonIgnore
     private transient Random random;
@@ -37,7 +37,7 @@ public class EssencePicker {
         List<Wonder> list = wonders.findAllByRarity(rarity.getName());
         for(int i = 0; i < 3; i++) {
             List<Wonder> filteredList = list.stream()
-                .filter(w -> w.getType().equals(type))
+                .filter(w -> w.getType().equals(type.toString()))
                 .collect(Collectors.toList());
             Wonder wonder = filteredList.get(random.nextInt(filteredList.size()));
             this.selectedWonders.add(wonder);
