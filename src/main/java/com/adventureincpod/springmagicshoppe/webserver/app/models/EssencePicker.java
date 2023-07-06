@@ -40,7 +40,7 @@ public class EssencePicker {
         }
         for(int i = 0; i < 3; i++) {
             List<Wonder> filteredList = list.stream()
-            .filter(w -> w.getType().equals(type.toString()))
+            .filter(w -> w.getType().equals(type.getName()))
             .collect(Collectors.toList());
             if(filteredList.isEmpty()) {
                 throw new IllegalArgumentException("Type returned no results");
