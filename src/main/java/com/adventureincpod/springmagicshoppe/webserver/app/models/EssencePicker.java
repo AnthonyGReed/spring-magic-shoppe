@@ -17,7 +17,6 @@ import lombok.Setter;
 @Setter @Getter
 public class EssencePicker {
     @JsonIgnore
-    @Autowired
     private transient WonderRepository wonders;
     private Rarity rarity;
     private String type;
@@ -25,18 +24,18 @@ public class EssencePicker {
     @JsonIgnore
     private transient Random random;
 
-    public EssencePicker(Rarity rarity, String type) {
+    public EssencePicker(Rarity rarity, String type, WonderRepository wonders) {
         this.rarity = rarity;
         this.type = type;
+        this.wonders = wonders;
         this.random = new Random();
         generateWonders();
     }
 
     private void generateWonders() {
-        List<Wonder> list = wonders.findAll();
+        List<Wonder> list = wonders.findAllByRarity(rarity.getName());
         for(int i = 0; i < 3; i++) {
             List<Wonder> filteredList = list.stream()
-                .filter(w -> w.getRarity().equals(rarity.getName()))
                 .filter(w -> w.getType().equals(type))
                 .collect(Collectors.toList());
             Wonder wonder = filteredList.get(random.nextInt(filteredList.size()));

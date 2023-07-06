@@ -35,7 +35,7 @@ public class RESTController {
 
     @GetMapping("/api/essence")
     public EssencePicker newPicker(@RequestParam("rarity") Rarity rarity, @RequestParam String type ) {
-        return new EssencePicker(rarity, type);
+        return new EssencePicker(rarity, type, wonderRepository);
     }
 
 }
