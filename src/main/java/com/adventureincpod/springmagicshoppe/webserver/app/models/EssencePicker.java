@@ -30,6 +30,7 @@ public class EssencePicker {
         this.type = type;
         this.wonders = wonders;
         this.random = new Random();
+        this.selectedWonders = new ArrayList<>();
         generateWonders();
     }
 
