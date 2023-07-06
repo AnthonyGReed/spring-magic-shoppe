@@ -5,15 +5,15 @@ package com.adventureincpod.springmagicshoppe.webserver.app.models.enums;
  * @author AGReed
  */
 public enum Types {
-    SCROLL(name:"Scroll"),
-    WEAPON(name:"Weapon"),
-    WONDROUSITEM(name:"Wondrous Item"),
-    RING(name:"Ring"),
-    WAND(name:"Wand"),
-    STAFF(name:"Staff"),
-    ARMOR(name:"Armor"),
-    POTION(name:"Potion"),
-    ROD(name:"Rod");
+    SCROLL("Scroll"),
+    WEAPON("Weapon"),
+    WONDROUSITEM("Wondrous Item"),
+    RING("Ring"),
+    WAND("Wand"),
+    STAFF("Staff"),
+    ARMOR("Armor"),
+    POTION("Potion"),
+    ROD("Rod");
 
     private final String NAME;
 
