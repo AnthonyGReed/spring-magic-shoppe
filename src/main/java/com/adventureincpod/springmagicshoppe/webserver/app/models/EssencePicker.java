@@ -35,10 +35,16 @@ public class EssencePicker {
 
     private void generateWonders() {
         List<Wonder> list = wonders.findAllByRarity(rarity.getName());
+        System.out.println("====");
+        System.out.println(list);
+        System.out.println("====");
         for(int i = 0; i < 3; i++) {
             List<Wonder> filteredList = list.stream()
                 .filter(w -> w.getType().equals(type.toString()))
                 .collect(Collectors.toList());
+            System.out.println("***");
+            System.out.println(filteredList);
+            System.out.println("***");
             Wonder wonder = filteredList.get(random.nextInt(filteredList.size()));
             this.selectedWonders.add(wonder);
         }
