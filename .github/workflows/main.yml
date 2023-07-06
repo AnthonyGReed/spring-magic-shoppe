@@ -51,7 +51,7 @@ jobs:
           username: ${{ secrets.REMOTE_USERNAME }}
           password: ${{ secrets.REMOTE_PASSWORD }}
           source: ${{ github.workspace }}/target/spring-magic-shoppe.jar
-          target: /var/magic-shoppe/latest/spring-magic-shoppe.jar
+          target: /var/magic-shoppe/latest
 
       - name: SSH into remote server and start application
         uses: appleboy/ssh-action@master
