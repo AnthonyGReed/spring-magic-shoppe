@@ -13,7 +13,7 @@ public enum Types {
     STAFF(name:"Staff"),
     ARMOR(name:"Armor"),
     POTION(name:"Potion"),
-    ROD(name:"Rod")
+    ROD(name:"Rod");
 
     private final String NAME;
 
