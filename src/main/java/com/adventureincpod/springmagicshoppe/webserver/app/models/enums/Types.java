@@ -5,13 +5,21 @@ package com.adventureincpod.springmagicshoppe.webserver.app.models.enums;
  * @author AGReed
  */
 public enum Types {
-    SCROLL,
-    WEAPON,
-    WONDROUSITEM,
-    RING,
-    WAND,
-    STAFF,
-    ARMOR,
-    POTION,
-    ROD
+    SCROLL(name:"Scroll"),
+    WEAPON(name:"Weapon"),
+    WONDROUSITEM(name:"Wondrous Item"),
+    RING(name:"Ring"),
+    WAND(name:"Wand"),
+    STAFF(name:"Staff"),
+    ARMOR(name:"Armor"),
+    POTION(name:"Potion"),
+    ROD(name:"Rod")
+
+    private final String NAME;
+
+    Types(String name) {
+        this.NAME = name;
+    }
+
+    public String getName() { return NAME; }
 }
