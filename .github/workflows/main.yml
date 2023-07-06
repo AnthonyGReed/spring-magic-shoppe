@@ -23,6 +23,7 @@ jobs:
           cd frontend
           npm ci
           npm run build
+          cd ..
 
       - name: Set up JDK
         uses: actions/setup-java@v2
