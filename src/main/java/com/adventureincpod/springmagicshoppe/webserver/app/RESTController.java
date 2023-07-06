@@ -3,6 +3,7 @@ package com.adventureincpod.springmagicshoppe.webserver.app;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.Shop;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.EssencePicker;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Rarity;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Types;
 import com.adventureincpod.springmagicshoppe.webserver.app.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class RESTController {
             scrollRepository, sessionRepository, storedItemsRepository); }
 
     @GetMapping("/api/essence")
-    public EssencePicker newPicker(@RequestParam("rarity") Rarity rarity, @RequestParam String type ) {
+    public EssencePicker newPicker(@RequestParam("rarity") Rarity rarity, @RequestParam("type") Types type ) {
         return new EssencePicker(rarity, type, wonderRepository);
     }
 

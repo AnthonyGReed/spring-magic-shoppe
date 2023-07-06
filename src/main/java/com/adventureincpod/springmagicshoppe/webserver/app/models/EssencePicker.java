@@ -3,6 +3,7 @@ package com.adventureincpod.springmagicshoppe.webserver.app.models;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.crud.Wonder;
 import com.adventureincpod.springmagicshoppe.webserver.app.repos.WonderRepository;
 import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Rarity;
+import com.adventureincpod.springmagicshoppe.webserver.app.models.enums.Types;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class EssencePicker {
     @JsonIgnore
     private transient Random random;
 
-    public EssencePicker(Rarity rarity, String type, WonderRepository wonders) {
+    public EssencePicker(Rarity rarity, Types type, WonderRepository wonders) {
         this.rarity = rarity;
         this.type = type;
         this.wonders = wonders;
